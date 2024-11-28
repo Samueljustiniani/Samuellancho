@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -244,31 +245,41 @@ public class Editar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextAreaComentarioActionPerformed
 
     private void Tabla_DatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_DatosMouseClicked
-        // Obtenemos la fila seleccionada en la tabla
-        int fila = Tabla_Datos.getSelectedRow();
+     // Obtenemos la fila seleccionada en la tabla
+    int fila = Tabla_Datos.getSelectedRow();
 
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
-        } else {
-            // Obtener los valores de cada columna en la fila seleccionada
-            String idDonacion = Tabla_Datos.getValueAt(fila, 0).toString(); // ID de la donación
-            String nombres = (String) Tabla_Datos.getValueAt(fila, 1);       // Nombres
-            String apellidos = (String) Tabla_Datos.getValueAt(fila, 2);    // Apellidos
-            String correo = (String) Tabla_Datos.getValueAt(fila, 3);       // Correo electrónico
-            String telefono = Tabla_Datos.getValueAt(fila, 4).toString();   // Teléfono
-            String seleccionObjetos = (String) Tabla_Datos.getValueAt(fila, 5); // Selección de objetos
-            String comentario = (String) Tabla_Datos.getValueAt(fila, 6);   // Comentarios
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar una fila de la tabla");
+    } else {
+        // Obtener los valores de cada columna en la fila seleccionada
+        String idDonacion = Tabla_Datos.getValueAt(fila, 0).toString(); // ID de la donación
+        String nombres = (String) Tabla_Datos.getValueAt(fila, 1);       // Nombres
+        String apellidos = (String) Tabla_Datos.getValueAt(fila, 2);    // Apellidos
+        String correo = (String) Tabla_Datos.getValueAt(fila, 3);       // Correo electrónico
+        String telefono = Tabla_Datos.getValueAt(fila, 4).toString();   // Teléfono
+        String seleccionObjetos = (String) Tabla_Datos.getValueAt(fila, 5); // Selección de objetos
+        String comentario = (String) Tabla_Datos.getValueAt(fila, 6);   // Comentarios
 
-            // Pasar los valores obtenidos a los campos del formulario
-            txtId.setText(idDonacion);
-            jTextFieldNombres.setText(nombres);
-            jTextFieldApellidos.setText(apellidos);
-            jTextFieldCorreo.setText(correo);
-            jTextFieldTelefono.setText(telefono);
-            jComboBoxSeleccionObjetos.setSelectedItem(seleccionObjetos); // Seleccionar el objeto en el JComboBox
-            jTextAreaComentario.setText(comentario);
+        // Verificar e inicializar jComboBoxSeleccionObjetos si es necesario
+        if (jComboBoxSeleccionObjetos == null) {
+            System.out.println("Inicializando JComboBox");
+            jComboBoxSeleccionObjetos = new JComboBox<>();
+            jComboBoxSeleccionObjetos.addItem("Alimentos");
+            jComboBoxSeleccionObjetos.addItem("Ropa");
+            jComboBoxSeleccionObjetos.addItem("Recursos tecnologicos");
+            jComboBoxSeleccionObjetos.addItem("Utiles escolares");
+            jComboBoxSeleccionObjetos.addItem("Otros");
         }
 
+        // Pasar los valores obtenidos a los campos del formulario
+        txtId.setText(idDonacion);
+        jTextFieldNombres.setText(nombres);
+        jTextFieldApellidos.setText(apellidos);
+        jTextFieldCorreo.setText(correo);
+        jTextFieldTelefono.setText(telefono);
+        jComboBoxSeleccionObjetos.setSelectedItem(seleccionObjetos);
+        jTextAreaComentario.setText(comentario);
+    }
     }//GEN-LAST:event_Tabla_DatosMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
